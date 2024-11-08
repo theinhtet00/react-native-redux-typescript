@@ -1,14 +1,13 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {StackScreenNames, StackScreens} from './src/screens';
 import StackNavigator from './src/navigations/stackNavigation';
-
-const Stack = createNativeStackNavigator();
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store';
 
 function App() {
   return (
-    <StackNavigator/>
+    <Provider store={store}>
+      <StackNavigator />
+    </Provider>
   );
 }
 
