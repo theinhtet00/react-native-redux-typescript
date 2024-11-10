@@ -1,25 +1,36 @@
 import React from "react";
 import {StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useTheme } from "@react-navigation/native";
 import { ThemeModel } from "../../model/theme/themeModel";
-import { toggleTheme } from "../../redux/slices/appSlice";
+import { languageControl, toggleTheme } from "../../redux/slices/appSlice";
 import { useAppTheme } from "../../hooks/useTheme";
+import { RootState } from "../../redux/store";
+import { LanguageType } from "../../localization/translation";
 
 const HomeScreen: React.FC = () => {
     const myStyle = useTheme() as ThemeModel; 
     const style = Styles(myStyle);
     const {theme} = useAppTheme();
-    const dispatch = useDispatch();  
+    const dispatch = useDispatch(); 
+    const appDetails = useSelector((app:RootState)=>app.AppReducer.languageObject);
+    const currentLanguage = useSelector((app:RootState)=>app.AppReducer.language) 
     const handleTheme = () =>{
         dispatch(toggleTheme());
     }
     return (
         <View style={style.container}>
-            <Text style={{color: myStyle.colors.text}}>Home Page</Text>
-            <Text style={{color: myStyle.colors.text}}>Current Theme : {theme}</Text>
+            <Text style={{color: myStyle.colors.text}}>{appDetails.home.name}</Text>
+            <Text style={{color: myStyle.colors.text}}>{appDetails.home.theme} : {theme}</Text>
+            <Text>{currentLanguage}</Text>
             <TouchableOpacity style={style.button} onPress={handleTheme}>
-                <Text style={{color: myStyle.colors.text}}>Toggle Theme</Text>
+                <Text style={{color: myStyle.colors.text}}>{appDetails.home.toggle_theme}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={style.button} onPress={()=>dispatch(languageControl(LanguageType.English))}>
+                <Text>EN</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={style.button} onPress={()=>dispatch(languageControl(LanguageType.Myanmar))}>
+                <Text>MM</Text>
             </TouchableOpacity>
         </View>
     )

@@ -1,0 +1,8 @@
+{
+    "language_name" : "en",
+    "home": {
+        "name": "Home Page",
+        "theme": "Current Theme",
+        "toggle_theme": "Toggle Theme"
+    }
+}

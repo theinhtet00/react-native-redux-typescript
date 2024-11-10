@@ -1,13 +1,12 @@
 import React from 'react';
 import StackNavigator from './src/navigations/stackNavigation';
-import {Provider} from 'react-redux';
-import {store} from './src/redux/store';
+import { ReduxProvider } from './src/redux/reduxProvider';
 
 function App() {
   return (
-    <Provider store={store}>
-      <StackNavigator />
-    </Provider>
+    <ReduxProvider>
+      <StackNavigator/>
+    </ReduxProvider>
   );
 }
 
