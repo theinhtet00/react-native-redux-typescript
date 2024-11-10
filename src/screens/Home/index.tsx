@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import {Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useDispatch, useSelector} from "react-redux";
 import { useTheme } from "@react-navigation/native";
 import { ThemeModel } from "../../model/theme/themeModel";
@@ -7,6 +7,7 @@ import { languageControl, toggleTheme } from "../../redux/slices/appSlice";
 import { useAppTheme } from "../../hooks/useTheme";
 import { RootState } from "../../redux/store";
 import { LanguageType } from "../../localization/translation";
+import Assets from "../../assets";
 
 const HomeScreen: React.FC = () => {
     const myStyle = useTheme() as ThemeModel; 
@@ -20,6 +21,7 @@ const HomeScreen: React.FC = () => {
     }
     return (
         <View style={style.container}>
+            <Image source={Assets.home.logo} style={style.logo}/>
             <Text style={{color: myStyle.colors.text}}>{appDetails.home.name}</Text>
             <Text style={{color: myStyle.colors.text}}>{appDetails.home.theme} : {theme}</Text>
             <Text>{currentLanguage}</Text>
@@ -42,6 +44,10 @@ export const Styles = (theme:ThemeModel) => StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: 'center'
+    },
+    logo: {
+        width: 200,
+        height: 200
     },
     button: {
         backgroundColor: theme.colors.primary,
